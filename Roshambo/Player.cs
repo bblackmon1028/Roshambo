@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RoshamboLab
 {
-    public class PlayerClass
+    public class Player
     {
         public string name;
         public Roshambo roshambo;

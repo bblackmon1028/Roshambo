@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace RoshamboLab
 {
-    public class HumanPlayer : PlayerClass
+    public class HumanPlayer : Player
     {
         public string Name;
 
@@ -18,7 +18,21 @@ namespace RoshamboLab
 
         public override Roshambo GenerateRoshambo()
         {
-            return Roshambo.Rock;
+            Console.WriteLine("Select your choice!");
+            Console.WriteLine("1. Rock, 2. Paper, 3. Scissors");
+            int answer = Validators.GetValidNumber(3);
+            if (answer == 1)
+            {
+                return Roshambo.Rock;
+            }
+            else if (answer == 2)
+            {
+                return Roshambo.Paper;
+            }
+            else
+            {
+                return Roshambo.Scissors;
+            }
         }
     }
 }

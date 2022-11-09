@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RoshamboLab
 {
-    public class RandomPlayer : PlayerClass
+    public class RandomPlayer : Player
     {
     }
 }

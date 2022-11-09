@@ -1,9 +1,11 @@
 ﻿using RoshamboLab;
 
 Console.WriteLine("What is your name?");
-HumanPlayer human = new HumanPlayer(Console.ReadLine());
-
-Console.WriteLine("Choose your opponent!");
-Console.WriteLine("1. Rock Player");
-Console.WriteLine("2. Random Player");
-GetOpponent();
+Player human = new HumanPlayer(Console.ReadLine());
+Player opponent = Validators.GetOpponent();
+string humanChoice = human.GenerateRoshambo().ToString();
+string opponentChoice = opponent.GenerateRoshambo().ToString();
+Console.WriteLine($"Your choice is: {humanChoice}");    
+Console.WriteLine($"Your opponents choice is: {opponentChoice}");
+string getWinner = Validators.GetWinner(humanChoice, opponentChoice);
+Console.WriteLine(getWinner);

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RoshamboLab
 {
-    public class RockPlayer : PlayerClass
+    public class RockPlayer : Player
     {
         public override Roshambo GenerateRoshambo()
         {
