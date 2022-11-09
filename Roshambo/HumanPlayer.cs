@@ -9,18 +9,15 @@ namespace RoshamboLab
 {
     public class HumanPlayer : Player
     {
-        public string Name;
-
-        public HumanPlayer(string name)
+        public HumanPlayer(string playerName)
         {
-            Name = name;
+            name = playerName;
         }
 
         public override Roshambo GenerateRoshambo()
         {
-            Console.WriteLine("Select your choice!");
-            Console.WriteLine("1. Rock, 2. Paper, 3. Scissors");
-            int answer = Validators.GetValidNumber(3);
+            string message = "Select your choice!\n1. Rock, 2. Paper, 3. Scissors";
+            int answer = Validators.GetValidNumber(3, message);
             if (answer == 1)
             {
                 return Roshambo.Rock;

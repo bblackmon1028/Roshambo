@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,11 +9,12 @@ namespace RoshamboLab
 {
     public class Validators
     {
-        public static int GetValidNumber(int maxRange)
+        public static int GetValidNumber(int maxRange, string message)
         {
-            bool validChoice;
+            bool validChoice = false;
             do
             {
+                Console.WriteLine(message);
                 try
                 {
                     int answer = Convert.ToInt32(Console.ReadLine());
@@ -24,23 +26,23 @@ namespace RoshamboLab
                     else
                     {
                         Console.WriteLine("That is not a valid number. Please try again.");
-                        return -1;
+                        validChoice = false;
                     }
                 }
                 catch (FormatException)
                 {
                     Console.WriteLine("That is not a valid number. Please try again.");
-                    return -1;
-                };
+                    validChoice = false;
+                }
             } while (!validChoice);
+
+            return -1;
         }
 
         public static Player GetOpponent()
         {
-            Console.WriteLine("Choose your opponent!");
-            Console.WriteLine("1. Rock Player");
-            Console.WriteLine("2. Random Player");
-            int answer = GetValidNumber(2);
+            string message = "Choose your opponent!\n1.Rock Player\n2.Random Player";
+            int answer = GetValidNumber(2, message);
             if (answer == 1)
             {
                 var player = new RockPlayer();
@@ -52,26 +54,59 @@ namespace RoshamboLab
                 return player;
             }
         }
-        
+
+        public static bool PlayAgain(string answer)
+        {
+            bool repeat = false;
+            do
+            {
+                if (answer == "y" || answer == "yes")
+                {
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine("Thanks for playing!");
+                    return false;
+                }
+            } while (repeat);
+        }
+
         public static string GetWinner(Player playerOne, Player playerTwo)
         {
+            Roshambo player1Choice = playerOne.GenerateRoshambo();
+            Roshambo player2Choice = playerTwo.GenerateRoshambo();
 
-            if (playerOne.GenerateRoshambo == playerTwo.GenerateRoshambo)
+            string player1Return = $"Your choice is: {player1Choice}";
+            string player2Return = $"\nOpponents choice is: {player2Choice}";
+
+            if (player1Choice == player2Choice)
             {
-                return "Tie Game!";
+                return $"{player1Return} {player2Return} \nTie Game!";
             }
-            if (answerOne == Roshambo.Paper.ToString() && answerTwo == Roshambo.Scissors.ToString())
+            if (player1Choice == Roshambo.Scissors && player2Choice == Roshambo.Paper)
             {
-                return "Scissors beats paper! ";
+                return $"{player1Return} {player2Return} \nScissors cuts paper! {playerOne.name} wins!";
             }
-            if (answerOne == Roshambo.Paper.ToString() && answerTwo == Roshambo.Rock.ToString() ||
-                answerTwo == Roshambo.Rock.ToString() && answerOne == Roshambo.Paper.ToString())
+            if (player1Choice == Roshambo.Paper && player2Choice == Roshambo.Scissors)
             {
-                return "Paper covers rock!";
+                return $"{player1Return} {player2Return} \nScissors cuts paper! {playerTwo.name} wins!";
+            }
+            if (player1Choice == Roshambo.Rock && player2Choice == Roshambo.Scissors)
+            {
+                return $"{player1Return} {player2Return} \nRock crushes scissors! {playerOne.name} wins!";
+            }
+            if (player1Choice == Roshambo.Scissors && player2Choice == Roshambo.Rock)
+            {
+                return $"{player1Return} {player2Return} \nRock crushes scissors! {playerTwo.name} wins!";
+            }
+            if (player1Choice == Roshambo.Paper && player2Choice == Roshambo.Rock)
+            {
+                return $"{player1Return} {player2Return} \nPaper covers rock! {playerOne.name} wins!";
             }
             else
             {
-                return "Rock crushes scissors!";
+                return $"{player1Return} {player2Return} \nPaper covers rock! {playerTwo.name} wins!";
             }
         }
     }

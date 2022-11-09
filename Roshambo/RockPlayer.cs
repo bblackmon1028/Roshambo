@@ -8,6 +8,10 @@ namespace RoshamboLab
 {
     public class RockPlayer : Player
     {
+        public RockPlayer()
+        {
+            name = "Rock Player";
+        }
         public override Roshambo GenerateRoshambo()
         {
             return Roshambo.Rock;

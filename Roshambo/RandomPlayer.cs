@@ -8,5 +8,9 @@ namespace RoshamboLab
 {
     public class RandomPlayer : Player
     {
+        public RandomPlayer ()
+        {
+            name = "Random Player";
+        }
     }
 }
